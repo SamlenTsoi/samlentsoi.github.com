@@ -6,7 +6,7 @@ email: 781700413@qq.com
 description: ""
 keyword: "it 音乐 电影 港剧"
 url: "samlentsoi.github.io"              # your host, for absolute URL
-baseurl: "/samlen"         # for example, '/blog' if your blog hosted on 'host/blog'
+baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 
 
