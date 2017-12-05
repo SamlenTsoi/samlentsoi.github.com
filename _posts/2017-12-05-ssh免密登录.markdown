@@ -1,0 +1,49 @@
+---
+layout:     post
+title:      "SSH免密登录"
+subtitle:   
+date:       2017-12-05
+author:     "Samlen_Tsoi"
+header-img: "img/post-bg-js-version.jpg"
+tags:
+    - Linux
+    - SSH
+---
+
+
+**生成ssh key**
+
+```
+ssh-keygen -t dsa
+```
+
+**服务器配置**  
+
+分别在服务器和客户端执行命令，会在~/.ssh会生成`id_rsa`、`id_rsa.pub`，  
+在服务器`~/.ssh`创建`authorized_keys`文本,文本内容为本地的`id_rsa.pub`的内容。
+
+**本机配置**  
+
+在`~/.ssh`目录创建`config`文本，内容如下：
+```
+##服务器名称（自定义）
+Host test
+##服务器地址
+HostName 192.168.1.1
+##ssh开放端口
+Port 22
+##用户
+User admin
+##本地私钥路径
+IdentityFile /Users/xxx/.ssh/id_rsa
+```
+
+**使用**  
+
+使用命令`ssh test`,其中`test`为你在`config`配置的`Host`的值。
+
+**可能遇到的问题**
+
+* `ssh test`提示权限不够，对`config`增加执行权限：`chmod 600 ~/.ssh/config`
+
+* 仍然需要需要密码，是因为服务器上的`~/.ssh/authorized_keys`权限不够，同样增加权限：`chmod 600 ~/.ssh/authorized_keys`
